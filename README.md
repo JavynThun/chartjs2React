@@ -1,224 +1,68 @@
-[![build status](	https://img.shields.io/travis/jerairrest/react-chartjs-2.svg?branch=master&style=flat-square)](https://travis-ci.org/jerairrest/react-chartjs-2)
-[![version](https://img.shields.io/npm/v/react-chartjs-2.svg?style=flat-square)](https://www.npmjs.com/package/react-chartjs-2)
-[![downloads](https://img.shields.io/npm/dm/react-chartjs-2.svg?style=flat-square)](https://npm-stat.com/charts.html?package=react-chartjs-2&from=2016-01-01)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### Looking for maintainers!!
+## Available Scripts
 
-# react-chartjs-2
+In the project directory, you can run:
 
-React wrapper for [Chart.js 2](http://www.chartjs.org/docs/#getting-started)
-Open for PRs and contributions!
+### `yarn start`
 
-# UPDATE to 2.x
-As of 2.x we have made chart.js a peer dependency for greater flexibility. Please add chart.js as a dependency on your project to use 2.x. Currently, 2.5.x is the recommended version of chart.js to use.
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Demo & Examples
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-Live demo: [jerairrest.github.io/react-chartjs-2](http://jerairrest.github.io/react-chartjs-2/)
+### `yarn test`
 
-To build the examples locally, run:
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-```bash
-npm install
-npm start
-```
+### `yarn build`
 
-Then open [`localhost:8000`](http://localhost:8000) in a browser.
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Demo & Examples via React Storybook
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-We have to build the package, then you can run storybook.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```bash
-npm run build
-npm run storybook
-```
+### `yarn eject`
 
-Then open [`localhost:6006`](http://localhost:6006) in a browser.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Installation via NPM
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-```bash
-npm install --save react-chartjs-2 chart.js
-```
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+## Learn More
 
-## Usage
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-Check example/src/components/* for usage.
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-```js
-import { Doughnut } from 'react-chartjs-2';
+### Code Splitting
 
-<Doughnut data={...} />
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Properties
+### Analyzing the Bundle Size
 
-* data: (PropTypes.object | PropTypes.func).isRequired,
-* width: PropTypes.number,
-* height: PropTypes.number,
-* id: PropTypes.string,
-* legend: PropTypes.object,
-* options: PropTypes.object,
-* redraw: PropTypes.bool,
-* getDatasetAtEvent: PropTypes.func,
-* getElementAtEvent: PropTypes.func,
-* getElementsAtEvent: PropTypes.func
-* onElementsClick: PropTypes.func, // alias for getElementsAtEvent (backward compatibility)
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Custom size
-In order for Chart.js to obey the custom size you need to set `maintainAspectRatio` to false, example:
+### Making a Progressive Web App
 
-```js
-<Bar
-  data={data}
-  width={100}
-  height={50}
-  options={{ maintainAspectRatio: false }}
-/>
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Chart.js instance
-Chart.js instance can be accessed by placing a ref to the element as:
+### Advanced Configuration
 
-```js
-chartReference = {};
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-componentDidMount() {
-  console.log(this.chartReference); // returns a Chart.js instance reference
-}
+### Deployment
 
-render() {
-  return (<Doughnut ref={(reference) => this.chartReference = reference } data={data} />)
-}
-```
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### Getting context for data generation
-Canvas node and hence context, that can be used to create CanvasGradient background,
-is passed as argument to data if given as function:
-
-This approach is useful when you want to keep your components pure.
-
-```js
-render() {
-  const data = (canvas) => {
-    const ctx = canvas.getContext("2d")
-    const gradient = ctx.createLinearGradient(0,0,100,0);
-    ...
-    return {
-      ...
-      backgroundColor: gradient
-      ...
-    }
-  }
+### `yarn build` fails to minify
 
-  return (<Line data={data} />)
-}
-```
-
-### Chart.js Defaults
-Chart.js defaults can be set by importing the `defaults` object:
-
-```javascript
-import { defaults } from 'react-chartjs-2';
-
-// Disable animating charts by default.
-defaults.global.animation = false;
-```
-
-If you want to bulk set properties, try using the [lodash.merge](https://lodash.com/docs/#merge) function. This function will do a deep recursive merge preserving previously set values that you don't want to update.
-
-```js
-import { defaults } from 'react-chartjs-2';
-import merge from 'lodash.merge';
-// or
-// import { merge } from 'lodash';
-
-merge(defaults, {
-  global: {
-    animation: false,
-    line: {
-      borderColor: '#F85F73',
-     },
-  },
-});
-```
-
-### Chart.js object
-
-You can access the internal Chart.js object to register plugins or extend charts like this:
-
-```JavaScript
-import { Chart } from 'react-chartjs-2';
-
-componentWillMount() {
-  Chart.pluginService.register({
-    afterDraw: function (chart, easing) {
-      // Plugin code.
-    }
-  });
-}
-```
-
-### Scatter Charts
-
-If you're using Chart.js 2.6 and below, add the `showLines: false` property to your chart options. This was later [added](https://github.com/chartjs/Chart.js/commit/7fa60523599a56255cde78a49e848166bd233c6e) in the default config, so users of later versions would not need to do this extra step.
-
-### Events
-
-#### onElementsClick || getElementsAtEvent (function)
-
-A function to be called when mouse clicked on chart elememts, will return all element at that point as an array. [Check](https://github.com/chartjs/Chart.js/blob/master/docs/09-Advanced.md#getelementsatevente)
-
-```js
-{
-  onElementsClick: (elems) => {},
-  getElementsAtEvent: (elems) => {},
-  // `elems` is an array of chartElements
-}
-
-```
-#### getElementAtEvent (function)
-
-Calling getElementAtEvent(event) on your Chart instance passing an argument of an event, or jQuery event, will return the single element at the event position. If there are multiple items within range, only the first is returned [Check](https://github.com/chartjs/Chart.js/blob/master/docs/09-Advanced.md#getelementatevente)
-
-```js
-{
-  getElementAtEvent: (elems) => {},
-  // => returns the first element at the event point.
-}
-```
-
-#### getDatasetAtEvent (function)
-
-Looks for the element under the event point, then returns all elements from that dataset. This is used internally for 'dataset' mode highlighting [Check](https://github.com/chartjs/Chart.js/blob/master/docs/09-Advanced.md#getdatasetatevente)
-
-```js
-{
-  getDatasetAtEvent: (dataset) => {}
-  // `dataset` is an array of chartElements
-}
-```
-
-### Working with Multiple Datasets
-
-You will find that any event which causes the chart to re-render, such as hover tooltips, etc., will cause the first dataset to be copied over to other datasets, causing your lines and bars to merge together. This is because to track changes in the dataset series, the library needs a `key` to be specified - if none is found, it can't tell the difference between the datasets while updating. To get around this issue, you can take these two approaches:
-
-1. Add a `label` property on each dataset. By default, this library uses the `label` property as the key to distinguish datasets.
-2. Specify a different property to be used as a key by passing a `datasetKeyProvider` prop to your chart component, which would return a unique string value for each dataset.
-
-## Development (`src`, `lib` and the build process)
-
-**NOTE:** The source code for the component is in `src`. A transpiled CommonJS version (generated with Babel) is available in `lib` for use with node.js, browserify and webpack. A UMD bundle is also built to `dist`, which can be included without the need for any build system.
-
-To build, watch and serve the examples (which will also watch the component source), run `npm start`. If you just want to watch changes to `src` and rebuild `lib`, run `npm run watch` (this is useful if you are working with `npm link`).
-
-
-## License
-
-[MIT Licensed](/LICENSE.md)
-Copyright (c) 2017 Jeremy Ayerst
-
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
